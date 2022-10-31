@@ -1,0 +1,18 @@
+ion-footer {
+    .footer-wrapper {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 10px;
+        justify-content: center;
+        background: #fff;
+        div {
+            // margin: 0px 24px;
+            color: #40436a;
+            font-weight: 500;
+            img {
+                width: 200px;
+            }
+        }
+    }
+}

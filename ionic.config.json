@@ -1,0 +1,7 @@
+{
+  "name": "uLearnSuperAdmin",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

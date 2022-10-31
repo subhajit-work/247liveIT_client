@@ -1,0 +1,50 @@
+<ion-header class="main-header">
+  <ion-toolbar>
+    <ion-buttons slot="start"> 
+      <ion-menu-button auto-hide="true" ></ion-menu-button>
+    </ion-buttons>
+    <!-- <ion-buttons slot="end" class="search-panel header-btn" [ngClass]="{ 'active': showSearch == true}">
+      <input class="search-box" type="search">
+      <button mat-button (click)="showSearchBox(showSearch)">
+        <mat-icon *ngIf="!showSearch">search</mat-icon>
+        <mat-icon *ngIf="showSearch">close</mat-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons slot="end" class="notification-panel header-btn">
+      <button matBadge="8" matBadgePosition="before" mat-button>
+        <mat-icon>notifications_none</mat-icon>
+      </button>
+    </ion-buttons> -->
+    <ion-buttons slot="end">
+      <div class="profile-box">
+        <button mat-button [matMenuTriggerFor]="profile">
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="assets/images/noimage.jpg">
+            </ion-avatar>
+            <ion-label>
+              <h2 class="userName">{{get_user_dtls?.user?.firstName}} {{get_user_dtls?.user?.lastName}}</h2>
+              <h3 class="userRole">{{get_user_dtls?.user?.email}}</h3>
+            </ion-label>
+          </ion-item>
+        </button>
+        <mat-menu #profile="matMenu" xPosition="before" backdropClass="matMenuDropdown">
+          <ul class="dropdown-box">
+            <li class="box-item profile-option">
+              <ul>
+                <li class="option-header">
+                  <p>Profile options</p>
+                </li>
+                <li><ion-label (click)="goToPage('user-profile', '')">My Account</ion-label></li>
+                <li><ion-label (click)="changePasswordOpenModal('change_password_modal', get_user_dtls?.user?.userId, '');">Change Password</ion-label></li>
+              </ul>
+            </li>
+            <li class="box-item">
+              <ion-button (click)="logout()" expand="block">Logout</ion-button>
+            </li>
+          </ul>
+        </mat-menu>
+      </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

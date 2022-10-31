@@ -1,0 +1,112 @@
+<ion-app>
+  <ion-split-pane contentId="main-content" [ngClass]="{ 'toggle-menu': toggle == true}">
+    <ion-menu *ngIf="get_user_dtls?.check_data?.facebook == 1 || get_user_dtls?.check_data?.google_ads == 1 || get_user_dtls?.check_data?.ctm == 1 || get_user_dtls?.check_data?.google_analytics == 1" contentId="main-content" type="overlay" class="main-side-menu">
+      <ion-header>
+        <ion-toolbar >
+          <ion-title>
+            <div class="header_logo">
+              <img class="logo-1stpart" src="assets/images/logo.png" alt="logo">
+              <!-- <span class="site-name">
+                <img src="assets/images/logo_2nd.png" alt="logo">
+              </span> -->
+              <mat-icon (click)="toggleMenu(toggle)">double_arrow</mat-icon>
+            </div>
+          </ion-title>
+          
+        </ion-toolbar>
+        <!-- <mat-icon class="toggle-btn" (click)="toggleMenu(toggle)">menu_open</mat-icon> -->
+      </ion-header>
+      <ion-content class="menu-list-box">
+        <mat-accordion>
+          <!-- Multiple menu start -->
+          <mat-expansion-panel (click)="menuClose()" *ngIf="get_user_dtls?.check_data?.facebook == 1 || get_user_dtls?.check_data?.google_ads == 1" class="noSubMenu" #example routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/','dashboard']">
+            <mat-expansion-panel-header class="mat-header-bg" [class.active-parent] = "example.expanded">
+              <mat-panel-title>
+                <mat-icon>home</mat-icon>
+                Home 
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+          <mat-expansion-panel (click)="menuClose()" *ngIf="get_user_dtls?.check_data?.facebook == 1" class="noSubMenu" #example routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/','ppc']">
+            <mat-expansion-panel-header class="mat-header-bg" [class.active-parent] = "example.expanded">
+              <mat-panel-title>
+                <mat-icon>dashboard</mat-icon>
+                PPC 
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel *ngIf="get_user_dtls?.check_data?.facebook == 1"  #example routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-expansion-panel-header class="mat-header-bg" [class.active-parent] = "example.expanded">
+              <mat-panel-title>
+                <mat-icon>share</mat-icon>
+                Social
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ion-list>
+              <ion-menu-toggle auto-hide="false">
+                <ion-item class="sub-item" [routerLink]="['/','social']" routerLinkActive="router-link-active" routerDirection="root" [routerLinkActiveOptions]="{ exact: true }">
+                  <ion-label>
+                    Facebook 
+                  </ion-label>
+                </ion-item>
+                <ion-item class="sub-item" [routerLink]="['/','instagram']" routerLinkActive="router-link-active" routerDirection="root" [routerLinkActiveOptions]="{ exact: true }">
+                  <ion-label>
+                    Instagram
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </ion-list>
+
+          </mat-expansion-panel>
+
+
+          <mat-expansion-panel (click)="menuClose()" class="noSubMenu" #example routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/','seo']">
+            <mat-expansion-panel-header class="mat-header-bg" [class.active-parent] = "example.expanded">
+              <mat-panel-title>
+                <mat-icon>line_axis</mat-icon>
+                SEO 
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+          <mat-expansion-panel (click)="menuClose()" *ngIf="get_user_dtls?.check_data?.ctm == 1" class="noSubMenu" #example routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/','call-tracking']">
+            <mat-expansion-panel-header class="mat-header-bg" [class.active-parent] = "example.expanded">
+              <mat-panel-title>
+                <mat-icon>signal_cellular_alt</mat-icon>
+                Call Tracking 
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel #example routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-expansion-panel-header class="mat-header-bg" [class.active-parent] = "example.expanded">
+              <mat-panel-title>
+                <ion-icon name="logo-google"></ion-icon>
+                Google
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ion-list>
+              <ion-menu-toggle auto-hide="false">
+                <ion-item class="sub-item" [routerLink]="['/','google-analytics']" routerLinkActive="router-link-active" routerDirection="root" [routerLinkActiveOptions]="{ exact: true }">
+                  <ion-label>
+                    Google Analytics  
+                  </ion-label>
+                </ion-item>
+                <ion-item class="sub-item" [routerLink]="['/','google-ads']" routerLinkActive="router-link-active" routerDirection="root" [routerLinkActiveOptions]="{ exact: true }">
+                  <ion-label>
+                    Google Ad's
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </ion-list>
+
+          </mat-expansion-panel>
+          <!-- Multiple menu end -->
+
+          
+        </mat-accordion>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

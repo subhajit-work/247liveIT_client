@@ -1,0 +1,214 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-content>
+    <div *ngIf="get_user_dtls?.check_data?.facebook == 0">
+        <img src="assets/images/warning.png">
+    </div>
+    <div *ngIf="get_user_dtls?.check_data?.facebook == 1" class="page-body">
+        <!-- loading -->
+        <div class="edit-loading-page" *ngIf="viewLoadData || googleLoadData">
+            <span>
+                <ion-spinner color="secondary" name="lines"></ion-spinner>
+            </span>
+        </div>
+        <div class="page-wrapper" >
+            <div class="page-header" *ngIf="!viewLoadData">
+                <div class="header-right">
+                  <p>Facebook Ad's</p>
+                </div>
+            </div>
+            <div class="note-section" *ngIf="!viewLoadData">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="3">
+                            <div class="note-item  note-item2 note-box-primary  card-outer">
+                                <div class="card card-box">
+                                    <div class="top">
+                                        <div class="icon">
+                                            <mat-icon>keyboard</mat-icon>
+                                        </div>
+                                    </div>
+                                    <div class="bottom"><b>{{viewData?.dashboard?.clicks}}</b>Clicks</div>
+                                </div>
+                            </div>             
+                        </ion-col>
+                        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="3">
+                            <div class="note-item  note-item2 note-box-danger  card-outer">
+                                <div class="card card-box">
+                                    <div class="top">
+                                        <div class="icon">
+                                            <mat-icon>description</mat-icon>
+                                        </div>
+                                    </div>
+                                    <div class="bottom"><b>{{viewData?.dashboard?.impressions}}</b>Impression</div>
+                                </div>
+                            </div> 
+                        </ion-col>
+                        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="3">
+                            <div class="note-item  note-item2 note-box-success  card-outer">
+                                <div class="card card-box">
+                                    <div class="top">
+                                        <div class="icon">
+                                            <mat-icon>person</mat-icon>
+                                        </div>
+                                    </div>
+                                    <div class="bottom"><b>{{viewData?.dashboard?.reach}}</b>Reach</div>
+                                </div>
+                            </div> 
+                        </ion-col>
+                        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="3">  
+                            
+                            <div class="note-item  note-item2 note-box-warning  card-outer">
+                                <div class="card card-box">
+                                    <div class="top">
+                                        <div class="icon">
+                                            <mat-icon>keyboard</mat-icon>
+                                        </div>
+                                    </div>
+                                    <div class="bottom"><b>{{viewData?.dashboard?.spend}}</b>Spend</div>
+                                </div>
+                            </div> 
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+            <div class="page-header" *ngIf="!googleLoadData">
+                <div class="header-right">
+                  <p>Google Ad's</p>
+                </div>
+            </div>
+            <!-- cards -->
+            <div class="note-section" *ngIf="!googleLoadData">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+                        <div class="note-item note-item2 note-box-primary card-outer">
+                            <div class="card card-box">
+                                <div class="top">
+                                    <div class="icon">
+                                        <mat-icon>paid</mat-icon>
+                                    </div>
+                                </div>
+                                <div class="bottom"><b>{{googleData?.overview?.ads_cost}}</b> Ad's Cost</div>
+                            </div>
+                        </div>             
+                        </ion-col>
+                        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+                        <div class="note-item note-item2 note-box-danger card-outer">
+                            <div class="card card-box">
+                                <div class="top">
+                                    <div class="icon">
+                                        <mat-icon>favorite</mat-icon>
+                                    </div>
+                                </div>
+                                <div class="bottom"><b>{{googleData?.overview?.ads_impressions}}</b> Ad's Impressions</div>
+                            </div>
+                        </div>             
+                        </ion-col>
+                        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+                        <div class="note-item note-item2 note-box-success card-outer">
+                            <div class="card card-box">
+                                <div class="top">
+                                    <div class="icon">
+                                        <mat-icon>published_with_changes</mat-icon>
+                                    </div>
+                                </div>
+                                <div class="bottom"><b>{{googleData?.overview?.all_conversions}}</b> All Conversions</div>
+                            </div>
+                        </div>             
+                        </ion-col>
+                        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+                        <div class="note-item note-item2 note-box-warning card-outer">
+                            <div class="card card-box">
+                                <div class="top">
+                                    <div class="icon">
+                                        <mat-icon>ads_click</mat-icon>
+                                    </div>
+                                </div>
+                                <div class="bottom"><b>{{googleData?.overview?.average_cpc}}</b> Average CPC</div>
+                            </div>
+                        </div>             
+                        </ion-col>
+                        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+                        <div class="note-item note-item2 note-box-primary card-outer">
+                            <div class="card card-box">
+                                <div class="top">
+                                    <div class="icon">
+                                        <mat-icon>mouse</mat-icon>
+                                    </div>
+                                </div>
+                                <div class="bottom"><b>{{googleData?.overview?.clicks}}</b> Clicks</div>
+                            </div>
+                        </div>             
+                        </ion-col>
+                        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+                        <div class="note-item note-item2 note-box-danger card-outer">
+                            <div class="card card-box">
+                                <div class="top">
+                                    <div class="icon">
+                                        <mat-icon>percent</mat-icon>
+                                    </div>
+                                </div>
+                                <div class="bottom"><b>{{googleData?.overview?.conversion_rate }}</b> Conversions Rate</div>
+                            </div>
+                        </div>             
+                        </ion-col>
+                        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+                        <div class="note-item note-item2 note-box-success card-outer">
+                            <div class="card card-box">
+                                <div class="top">
+                                    <div class="icon">
+                                        <mat-icon>question_answer</mat-icon>
+                                    </div>
+                                </div>
+                                <div class="bottom"><b>{{googleData?.overview?.conversions}}</b> Conversions</div>
+                            </div>
+                        </div>             
+                        </ion-col>
+                        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+                        <div class="note-item note-item2 note-box-warning card-outer">
+                            <div class="card card-box">
+                                <div class="top">
+                                    <div class="icon">
+                                        <mat-icon>price_change</mat-icon>
+                                    </div>
+                                </div>
+                                <div class="bottom"><b>{{googleData?.overview?.conversions_value}}</b> Conversions Value</div>
+                            </div>
+                        </div>             
+                        </ion-col>
+                        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+                        <div class="note-item note-item2 note-box-success card-outer">
+                            <div class="card card-box">
+                                <div class="top">
+                                    <div class="icon">
+                                        <mat-icon>trending_up</mat-icon>
+                                    </div>
+                                </div>
+                                <div class="bottom"><b>{{googleData?.overview?.ctr}}</b> CTR</div>
+                            </div>
+                        </div>             
+                        </ion-col>
+                        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+                        <div class="note-item note-item2 note-box-warning card-outer">
+                            <div class="card card-box">
+                                <div class="top">
+                                    <div class="icon">
+                                        <mat-icon>thumbs_up_down</mat-icon>
+                                    </div>
+                                </div>
+                                <div class="bottom"><b>{{googleData?.overview?.impressions}}</b> Impressions</div>
+                            </div>
+                        </div>             
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </div>
+    </div>
+</ion-content>
+
+<!-- common footer show -->
+<common-footer></common-footer>
+

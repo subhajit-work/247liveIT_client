@@ -1,0 +1,435 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-content>
+  <div class="page-body">
+    <div class="edit-loading-page" *ngIf="viewLoadData">
+      <span>
+          <ion-spinner color="secondary" name="lines"></ion-spinner>
+      </span>
+    </div>
+    <div class="page-wrapper" *ngIf="!viewLoadData">
+      <div class="page-header">
+        <div class="header-right">
+          <p>Google Analytics Data</p>
+        </div>
+        <div class="header-left">
+          <div class="input-field mat-datePicker">
+            <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate [(ngModel)]="fromDate" placeholder="Start date" (dateInput)="startDate('input', $event)" (dateChange)="startDate('change', $event)">
+                <input matEndDate [(ngModel)]="toDate" placeholder="End date" (dateInput)="endDate('input', $event)" (dateChange)="endDate('change', $event)">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </div>
+        </div>
+      </div>
+
+      <ion-grid>
+        <ion-row>
+            <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="8">
+              <div class="note-section">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4">
+                      <div class="note-item note-item2 note-box-primary card-outer">
+                          <div class="card card-box">
+                              <div class="top">
+                                  <div class="icon">
+                                      <mat-icon>person</mat-icon>
+                                  </div>
+                              </div>
+                              <div class="bottom"><b>{{viewData?.users}}</b> Users</div>
+                          </div>
+                      </div>             
+                    </ion-col>
+                    <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4">
+                      <div class="note-item note-item2 note-box-danger card-outer">
+                        <div class="card card-box">
+                            <div class="top">
+                                <div class="icon">
+                                    <mat-icon>people</mat-icon>
+                                </div>
+                            </div>
+                            <div class="bottom"><b>{{viewData?.newUsers}}</b> New Users</div>
+                        </div>
+                      </div>             
+                    </ion-col>
+                    <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4">
+                      <div class="note-item note-item2 note-box-success card-outer">
+                        <div class="card card-box">
+                            <div class="top">
+                                <div class="icon">
+                                    <mat-icon>published_with_changes</mat-icon>
+                                </div>
+                            </div>
+                            <div class="bottom"><b>{{viewData?.sessions}}</b> Sessions</div>
+                        </div>
+                      </div>             
+                    </ion-col>
+                    <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4">
+                      <div class="note-item note-item2 note-box-warning card-outer">
+                        <div class="card card-box">
+                            <div class="top">
+                                <div class="icon">
+                                    <mat-icon>tag</mat-icon>
+                                </div>
+                            </div>
+                            <div class="bottom"><b>{{viewData?.sessionsPerUser | number : '1.2-2' }}</b> No. of Sessions per User</div>
+                        </div>
+                      </div>             
+                    </ion-col>
+                    <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4">
+                      <div class="note-item note-item2 note-box-primary card-outer">
+                          <div class="card card-box">
+                              <div class="top">
+                                  <div class="icon">
+                                      <mat-icon>preview</mat-icon>
+                                  </div>
+                              </div>
+                              <div class="bottom"><b>{{viewData?.pageviews}}</b> Page Views</div>
+                          </div>
+                      </div>             
+                    </ion-col>
+                    <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4">
+                      <div class="note-item note-item2 note-box-danger card-outer">
+                        <div class="card card-box">
+                            <div class="top">
+                                <div class="icon">
+                                    <mat-icon>article</mat-icon>
+                                </div>
+                            </div>
+                            <div class="bottom"><b>{{viewData?.pageviewsPerSession | number : '1.2-2' }}</b> Pages/Session</div>
+                        </div>
+                      </div>             
+                    </ion-col>
+                    <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4">
+                      <div class="note-item note-item2 note-box-success card-outer">
+                        <div class="card card-box">
+                            <div class="top">
+                                <div class="icon">
+                                    <mat-icon>timelapse</mat-icon>
+                                </div>
+                            </div>
+                            <div class="bottom"><b>{{viewData?.avgSessionDuration | number : '1.2-2' }}</b> Avg. Session Duration</div>
+                        </div>
+                      </div>             
+                    </ion-col>
+                    <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4">
+                      <div class="note-item note-item2 note-box-warning card-outer">
+                        <div class="card card-box">
+                            <div class="top">
+                                <div class="icon">
+                                    <mat-icon>trending_up</mat-icon>
+                                </div>
+                            </div>
+                            <div class="bottom"><b>{{viewData?.bounceRate | number : '1.2-2' }}%</b> Bounce Rate</div>
+                        </div>
+                      </div>             
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div>
+            </ion-col>
+            <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4">
+              <div id="chart">
+                <apx-chart
+                  [series]="chartOptions.series"
+                  [chart]="chartOptions.chart"
+                  [labels]="chartOptions.labels"
+                  [responsive]="chartOptions.responsive"
+                ></apx-chart>
+              </div>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- Traffice -->
+      <div class="table-listing">
+        <div class="card-outer">
+          <div class="card card-box">
+              <div class="card-header">
+                  <div class="card-header-tittle">
+                      Traffic (Refferal)
+                  </div>
+                  <div class="card-header-action">
+                    
+                  </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="ion-text-start">
+                                    <div>
+                                        #
+                                    </div>
+                                </th>
+                                <th class="ion-text-start">
+                                    <div>
+                                        Source
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Users
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        New Users
+                                    </div>
+                                </th><th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Sessions
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Avg Session Duration
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Bounce Rate
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Page View / Session
+                                    </div>
+                                </th>
+                                <!-- <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Actions
+                                    </div>
+                                </th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr [hidden]="viewData?.traffic_data?.referralPath?.length == 0" *ngFor="let item of viewData?.traffic_data?.referralPath; let i = index">
+                                <td>{{i + 1}}</td>
+                                <td>{{item[6]}}</td>
+                                <td class="ion-text-center">{{item[0]}}</td>
+                                <td class="ion-text-center">{{item[1]}}</td>
+                                <td class="ion-text-center">{{item[2]}}</td>
+                                <td class="ion-text-center">{{item[3] | number : '1.2-2'}}</td>
+                                <td class="ion-text-center">{{item[4] | number : '1.2-2'}}</td>
+                                <td class="ion-text-center">{{item[5] | number : '1.2-2'}}</td>
+                                <!-- <td>
+                                    <div class="action ion-text-center">
+                                        <ion-button matTooltip="View" matTooltipPosition="above" size="small" color="success" [routerLink]="['/', 'report-view', 'campaign', item.ad_id]" >
+                                            <mat-icon>fullscreen</mat-icon>
+                                        </ion-button>
+                                        <ion-button matTooltip="PDF" matTooltipPosition="above" size="small" color="tertiary">
+                                            <mat-icon>picture_as_pdf</mat-icon>
+                                        </ion-button>
+                                    </div>
+                                </td> -->
+                            </tr>
+                            <tr *ngIf="viewData?.traffic_data?.referralPath?.length == 0" class="ion-text-center">
+                              <td colspan="100">No data found</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Traffic (Source/Medium) -->
+      <div class="table-listing">
+        <div class="card-outer">
+          <div class="card card-box">
+              <div class="card-header">
+                  <div class="card-header-tittle">
+                    Traffic (Source/Medium)
+                  </div>
+                  <div class="card-header-action">
+                    
+                  </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="ion-text-start">
+                                    <div>
+                                        #
+                                    </div>
+                                </th>
+                                <th class="ion-text-start">
+                                    <div>
+                                        Source
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Users
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        New Users
+                                    </div>
+                                </th><th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Sessions
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Avg Session Duration
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Bounce Rate
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Page View / Session
+                                    </div>
+                                </th>
+                                <!-- <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Actions
+                                    </div>
+                                </th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr [hidden]="viewData?.traffic_data?.sourceMedium?.length == 0" *ngFor="let item of viewData?.traffic_data?.sourceMedium; let i = index">
+                                <td>{{i + 1}}</td>
+                                <td>{{item[6]}}</td>
+                                <td class="ion-text-center">{{item[0]}}</td>
+                                <td class="ion-text-center">{{item[1]}}</td>
+                                <td class="ion-text-center">{{item[2]}}</td>
+                                <td class="ion-text-center">{{item[3] | number : '1.2-2'}}</td>
+                                <td class="ion-text-center">{{item[4] | number : '1.2-2'}}</td>
+                                <td class="ion-text-center">{{item[5] | number : '1.2-2'}}</td>
+                                <!-- <td>
+                                    <div class="action ion-text-center">
+                                        <ion-button matTooltip="View" matTooltipPosition="above" size="small" color="success" [routerLink]="['/', 'report-view', 'campaign', item.ad_id]" >
+                                            <mat-icon>fullscreen</mat-icon>
+                                        </ion-button>
+                                        <ion-button matTooltip="PDF" matTooltipPosition="above" size="small" color="tertiary">
+                                            <mat-icon>picture_as_pdf</mat-icon>
+                                        </ion-button>
+                                    </div>
+                                </td> -->
+                            </tr>
+                            <tr *ngIf="viewData?.traffic_data?.sourceMedium?.length == 0" class="ion-text-center">
+                              <td colspan="100">No data found</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Traffic By Country -->
+      <div class="table-listing">
+        <div class="card-outer">
+          <div class="card card-box">
+              <div class="card-header">
+                  <div class="card-header-tittle">
+                    Traffic By Country
+                  </div>
+                  <div class="card-header-action">
+                    
+                  </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="ion-text-start">
+                                    <div>
+                                        #
+                                    </div>
+                                </th>
+                                <th class="ion-text-start">
+                                    <div>
+                                        Country Name
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Users
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        New Users
+                                    </div>
+                                </th><th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Sessions
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Avg Session Duration
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Bounce Rate
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Page View / Session
+                                    </div>
+                                </th>
+                                <!-- <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Actions
+                                    </div>
+                                </th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr [hidden]="viewData?.traffic_data?.traffic_by_Country?.length == 0" *ngFor="let item of viewData?.traffic_data?.traffic_by_Country; let i = index">
+                                <td>{{i + 1}}</td>
+                                <td>{{item[6]}}</td>
+                                <td class="ion-text-center">{{item[0]}}</td>
+                                <td class="ion-text-center">{{item[1]}}</td>
+                                <td class="ion-text-center">{{item[2]}}</td>
+                                <td class="ion-text-center">{{item[3] | number : '1.2-2'}}</td>
+                                <td class="ion-text-center">{{item[4] | number : '1.2-2'}}</td>
+                                <td class="ion-text-center">{{item[5] | number : '1.2-2'}}</td>
+                                <!-- <td>
+                                    <div class="action ion-text-center">
+                                        <ion-button matTooltip="View" matTooltipPosition="above" size="small" color="success" [routerLink]="['/', 'report-view', 'campaign', item.ad_id]" >
+                                            <mat-icon>fullscreen</mat-icon>
+                                        </ion-button>
+                                        <ion-button matTooltip="PDF" matTooltipPosition="above" size="small" color="tertiary">
+                                            <mat-icon>picture_as_pdf</mat-icon>
+                                        </ion-button>
+                                    </div>
+                                </td> -->
+                            </tr>
+                            <tr *ngIf="viewData?.traffic_data?.traffic_by_Country?.length == 0" class="ion-text-center">
+                              <td colspan="100">No data found</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<!-- common footer show -->
+<common-footer></common-footer>

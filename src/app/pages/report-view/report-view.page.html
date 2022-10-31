@@ -1,0 +1,308 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-content>
+  <div class="page-body">
+    <!-- loading -->
+    <div class="edit-loading-page" *ngIf="viewLoadData">
+      <span>
+          <ion-spinner color="secondary" name="lines"></ion-spinner>
+      </span>
+    </div>
+    
+    <div class="page-wrapper" *ngIf="!viewLoadData">
+      <div class="note-section">
+        <ion-grid>
+          <ion-row>
+              <ion-col size-xs="6" size-sm="6" size-md="6" size-lg="3">
+                <div class="note-item note-item2 note-box-primary card-outer">
+                    <div class="card card-box">
+                        <div class="top">
+                            <div class="icon">
+                                <mat-icon>ads_click</mat-icon>
+                            </div>
+                        </div>
+                        <div class="bottom"><b>{{viewData?.clicks}}</b> Clicks</div>
+                    </div>
+                </div>             
+              </ion-col>
+              <ion-col size-xs="6" size-sm="6" size-md="6" size-lg="3">
+                <div class="note-item note-item2 note-box-warning card-outer">
+                  <div class="card card-box">
+                      <div class="top">
+                          <div class="icon">
+                              <mat-icon>insights</mat-icon>
+                          </div>
+                      </div>
+                      <div class="bottom"><b>{{viewData?.impressions}}</b> Impressions</div>
+                  </div>
+                </div>             
+              </ion-col>
+              <ion-col size-xs="6" size-sm="6" size-md="6" size-lg="3">
+                <div class="note-item note-item2 note-box-success card-outer">
+                  <div class="card card-box">
+                      <div class="top">
+                          <div class="icon">
+                              <mat-icon>leaderboard</mat-icon>
+                          </div>
+                      </div>
+                      <div class="bottom"><b>{{viewData?.reach}}</b> Reach</div>
+                  </div>
+                </div>             
+              </ion-col>
+              <ion-col size-xs="6" size-sm="6" size-md="6" size-lg="3">
+                <div class="note-item note-item2 note-box-danger card-outer">
+                  <div class="card card-box">
+                      <div class="top">
+                          <div class="icon">
+                              <mat-icon>savings</mat-icon>
+                          </div>
+                      </div>
+                      <div class="bottom"><b>{{viewData?.spend}}</b> Amount Spend</div>
+                  </div>
+                </div>             
+              </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+      <div class="card-outer">
+        <div class="card card-box">
+          <div class="card-header">
+            <div class="card-header-tittle">
+              Campaign Details
+            </div>
+            <div class="card-header-action">
+              <mat-icon>badge</mat-icon>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="view-data">
+              <ion-grid>
+                <ion-row class="border">
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorCyan">tag</mat-icon>
+                      <span class="text-tittle">Ad Id :</span>
+                      <span class="text-content">{{viewData?.ad_id}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorBlue">alternate_email</mat-icon>
+                      <span class="text-tittle">Ad Name :</span>
+                      <span class="text-content">{{viewData?.ad_name}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorRed">tag</mat-icon>
+                      <span class="text-tittle">Campaign Id :</span>
+                      <span class="text-content">{{viewData?.campaign_id}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorLightBlue">alternate_email</mat-icon>
+                      <span class="text-tittle">Campaign Name :</span>
+                      <span class="text-content">{{viewData?.campaign_name}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorMaroon">ads_click</mat-icon>
+                      <span class="text-tittle">Clicks :</span>
+                      <span class="text-content">{{viewData?.clicks}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorLightGreen">ads_click</mat-icon>
+                      <span class="text-tittle">Cost per clicks :</span>
+                      <span class="text-content">{{viewData?.cpc}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorLime">attach_money</mat-icon>
+                      <span class="text-tittle">Cost per mille :</span>
+                      <span class="text-content">{{viewData?.cpm}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorOlive">mouse</mat-icon>
+                      <span class="text-tittle">Clicks through rate :</span>
+                      <span class="text-content">{{viewData?.ctr}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorOrange">lens_blur</mat-icon>
+                      <span class="text-tittle">Cost per pixel :</span>
+                      <span class="text-content">{{viewData?.cpp}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorMaroon">today</mat-icon>
+                      <span class="text-tittle">Date start :</span>
+                      <span class="text-content">{{viewData?.date_start}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorMaroon">date_range</mat-icon>
+                      <span class="text-tittle">Date stop :</span>
+                      <span class="text-content">{{viewData?.date_stop}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorOlive">radio</mat-icon>
+                      <span class="text-tittle">Frequency :</span>
+                      <span class="text-content">{{viewData?.frequency}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorOrange">emoji_emotions</mat-icon>
+                      <span class="text-tittle">Impressions :</span>
+                      <span class="text-content">{{viewData?.impressions}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorMaroon">bar_chart</mat-icon>
+                      <span class="text-tittle">Reach :</span>
+                      <span class="text-content">{{viewData?.reach}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorMaroon">savings</mat-icon>
+                      <span class="text-tittle">Amount spend :</span>
+                      <span class="text-content">{{viewData?.spend}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorCyan">share</mat-icon>
+                      <span class="text-tittle">Social spend :</span>
+                      <span class="text-content">{{viewData?.social_spend}}</span>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ordinary-table">
+        <div class="card-outer">
+          <div class="card card-box">
+              <div class="card-header">
+                  <div class="card-header-tittle">
+                    Cost Accuracy
+                  </div>
+                  <div class="card-header-action">
+                    <mat-icon>price_change</mat-icon>
+                  </div>
+              </div>
+              <div class="card-body">
+                <div class="ordinary-table-inner">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th class="ion-text-center">#</th>
+                        <th>Action type</th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let Costitem of viewData?.cost_per_action_type; let i = index">
+                        <td class="ion-text-center">{{i + 1}}</td>
+                        <td>{{Costitem?.action_type}}</td>
+                        <td>{{Costitem?.value}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+            <div class="status-spiner">
+              <div class="card-outer">
+                <div class="card card-box">
+                  <div class="card-header noBorder">
+                    <div class="card-header-tittle">
+                      <b>Chart of Marks Deviation Calculation</b>
+                    </div>
+                    <div class="card-header-action">
+                      <!-- <mat-icon>badge</mat-icon> -->
+                    </div>
+                  </div>
+                  <div class="card-body ion-text-center">
+                    <div id="chart">
+                      <apx-chart
+                        [series]="cost_per_action_type.series"
+                        [chart]="cost_per_action_type.chart"
+                        [labels]="cost_per_action_type.labels"
+                        [fill]="cost_per_action_type.fill"
+                        [dataLabels]="cost_per_action_type.dataLabels"
+                        [responsive]="cost_per_action_type.responsive"
+                      ></apx-chart>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div class="ordinary-table">
+        <div class="card-outer">
+          <div class="card card-box">
+              <div class="card-header">
+                  <div class="card-header-tittle">
+                    Clicks Accuracy
+                  </div>
+                  <div class="card-header-action">
+                    <mat-icon>ads_click</mat-icon>
+                  </div>
+              </div>
+              <div class="card-body">
+                <div class="ordinary-table-inner">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th class="ion-text-center">#</th>
+                        <th>Action type</th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let Costitem of viewData?.actions; let i = index">
+                        <td class="ion-text-center">{{i + 1}}</td>
+                        <td>{{Costitem?.action_type}}</td>
+                        <td>{{Costitem?.value}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<!-- common footer show -->
+<common-footer></common-footer>

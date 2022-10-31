@@ -1,0 +1,10 @@
+.iconWithName {
+    display: flex;
+    text-transform: capitalize;
+    mat-icon{
+        margin-right: 5px;
+    }
+}
+ion-item{
+    --padding-start: 0px;
+}

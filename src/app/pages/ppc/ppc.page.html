@@ -1,0 +1,147 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-content>
+  <div class="page-body">
+    <div class="page-wrapper">
+      <div class="table-listing">
+        <div class="card-outer">
+          <div class="card card-box">
+              <div class="card-header">
+                  <div class="card-header-tittle">
+                      Facebook campaigns
+                  </div>
+                  <div class="card-header-action">
+                    <div class="form-layout">
+                        <div class="form-wrapper">
+                            <div class="form-item">
+                                <ion-label>Enter date range</ion-label>
+                                <div class="input-field mat-datePicker">
+                                    <mat-date-range-input [rangePicker]="picker">
+                                        <input matStartDate placeholder="Start date" (dateInput)="startDate('input', $event)" (dateChange)="startDate('change', $event)">
+                                        <input matEndDate placeholder="End date" (dateInput)="endDate('input', $event)" (dateChange)="endDate('change', $event)">
+                                    </mat-date-range-input>
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-date-range-picker #picker></mat-date-range-picker>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="ion-text-start">
+                                    <div>
+                                        #
+                                    </div>
+                                </th>
+                                <th class="ion-text-start">
+                                    <div>
+                                        Campaign Id
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Campaign name
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Clicks
+                                    </div>
+                                </th><th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Reach
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Frequency
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Impressions
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Amount Spend (₹)
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Actions
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr [hidden]="tableLoadData" *ngFor="let item of tableViewData; let i = index">
+                                <td>{{i + 1}}</td>
+                                <td>{{item?.campaign_id}}</td>
+                                <td>{{item?.campaign_name}}</td>
+                                <td>{{item?.clicks}}</td>
+                                <td>{{item?.reach}}</td>
+                                <td>{{item?.frequency}}</td>
+                                <td>{{item?.impressions}}</td>
+                                <td>{{item?.spend}}</td>
+                                <td>
+                                    <div class="action ion-text-center">
+                                        <ion-button matTooltip="View" matTooltipPosition="above" size="small" color="success" [routerLink]="['/', 'report-view', 'campaign', item.ad_id]" >
+                                            <mat-icon>fullscreen</mat-icon>
+                                        </ion-button>
+                                        <!-- <ion-button matTooltip="PDF" matTooltipPosition="above" size="small" color="tertiary">
+                                            <mat-icon>picture_as_pdf</mat-icon>
+                                        </ion-button> -->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="tableViewData?.length == 0 && !tableLoadData" class="ion-text-center">
+                                <td colspan="100">No data found</td>
+                            </tr>
+                            <tr [hidden]="!tableLoadData" class="ion-text-center">
+                                <td colspan="100">
+                                    Data is loading...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+              <div class="card-footer">
+                  <div class="action">
+                    <!-- <ion-button size="small" color="secondary">
+                        <mat-icon>refresh</mat-icon>
+                    </ion-button>
+                    <ion-button size="small" color="success">
+                        <mat-icon>visibility</mat-icon>
+                    </ion-button>
+                    <ion-button size="small" color="medium">
+                        <mat-icon>visibility_off</mat-icon>
+                    </ion-button>
+                    <ion-button size="small" color="danger">
+                        <mat-icon>delete</mat-icon>
+                    </ion-button>
+                    <ion-button size="small" color="tertiary">
+                        <mat-icon>picture_as_pdf</mat-icon>
+                    </ion-button>
+                    <ion-button size="small" color="warning">
+                        <mat-icon>description</mat-icon>
+                    </ion-button> -->
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ion-content>
+
+<!-- common footer show -->
+<common-footer></common-footer>

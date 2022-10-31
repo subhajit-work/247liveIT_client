@@ -1,0 +1,116 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-content>
+  <div class="page-body">
+    <div class="page-wrapper">
+
+      <!-- Second table start -->
+      <div class="table-listing">
+        <div class="card-outer">
+          <div class="card card-box">
+              <div class="card-header">
+                  <div class="card-header-tittle">
+                      Facebook posts
+                  </div>
+                  <div class="card-header-action">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                  </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="ion-text-start">
+                                    <div>
+                                        #
+                                    </div>
+                                </th>
+                                <th class="ion-text-start">
+                                    <div>
+                                        Image
+                                    </div>
+                                </th>
+                                <th class="ion-text-start">
+                                    <div style="max-width: 250px;">
+                                        Content
+                                    </div>
+                                </th>
+                                <th class="ion-text-start">
+                                    <div>
+                                        Reactions
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr [hidden]="viewLoadData" *ngFor="let item of viewData?.data; let i = index">
+                                <td>{{i + 1}}</td>
+                                <td>
+                                    <img style="max-width: 150px;" src="{{item?.full_picture}}">
+                                </td>
+                                <td><div class="more-text" [innerHTML]="item?.message | safeHtml"></div></td>
+                                <td>{{item?.reactions?.summary?.total_count}}</td>
+                            </tr>
+                            <tr *ngIf="viewData?.data?.length == 0 && !viewLoadData" class="ion-text-center">
+                                <td colspan="100">No data found</td>
+                            </tr>
+                            <tr [hidden]="!viewLoadData" class="ion-text-center">
+                                <td colspan="100">
+                                    Data is loading...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+              <div class="card-footer">
+                  <div class="action">
+                    <!-- <ion-button size="small" color="secondary">
+                        <mat-icon>refresh</mat-icon>
+                    </ion-button>
+                    <ion-button size="small" color="success">
+                        <mat-icon>visibility</mat-icon>
+                    </ion-button>
+                    <ion-button size="small" color="medium">
+                        <mat-icon>visibility_off</mat-icon>
+                    </ion-button>
+                    <ion-button size="small" color="danger">
+                        <mat-icon>delete</mat-icon>
+                    </ion-button>
+                    <ion-button size="small" color="tertiary">
+                        <mat-icon>picture_as_pdf</mat-icon>
+                    </ion-button>
+                    <ion-button size="small" color="warning">
+                        <mat-icon>description</mat-icon>
+                    </ion-button> -->
+                  </div>
+                  <div>
+                    <ul class="pagination">
+                        <li class="circle-border" (click)="nextPrevious(viewData?.paging?.before, 'before')">
+                            <a>
+                              <!-- First -->
+                              <ion-icon name="play-skip-back"></ion-icon>
+                            </a>
+                        </li>
+                        <li> <span class="ran-separator pull-right margin-top-3"></span> </li>
+                        <li class="circle-border" (click)="nextPrevious(viewData?.paging?.after, 'after')">
+                            <a>
+                              <!-- Last -->
+                              <ion-icon name="play-skip-forward"></ion-icon>
+                            </a>
+                        </li>
+                    </ul>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- Second table end -->
+    </div>
+  </div>
+</ion-content>
+
+<!-- common footer show -->
+<common-footer></common-footer>

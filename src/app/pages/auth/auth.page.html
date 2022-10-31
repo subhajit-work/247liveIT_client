@@ -1,0 +1,71 @@
+<ion-content>
+  <div class="login-page">
+    <div class="login-wrapper">
+      <div class="login-inner">
+        <ion-grid>
+          <ion-row>
+            <ion-col size-md="12" size-lg="6" size-xs="12" size-sm="6">
+              <div class="login-form">
+                <div class="form-inner">
+                  <div class="form-header">
+                    <div class="form-header-top">
+                      <p>Welcome To</p>
+                    </div>
+                    <div class="form-header-middle">
+                      <img src="assets/images/logo.png">
+                    </div>
+                    <div class="form-header-bottom">
+                      <p>
+                        Login in to get in the moment updates on the things that interest you.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="form-body">
+                    <form #loginForm="ngForm" (ngSubmit)="onSubmitForm(loginForm)" (keyup.enter)="onSubmitForm(loginForm)">
+                      <mat-form-field appearance="outline">
+                        <mat-icon matPrefix>person</mat-icon>
+                        <mat-label>Username</mat-label>
+                        <input matInput placeholder="Placeholder" ngModel
+                        type="email"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                        name="email"
+                        email
+                        required
+                        clearInput>
+                      </mat-form-field>
+                      <mat-form-field appearance="outline">
+                        <mat-icon matPrefix>lock</mat-icon>
+                        <mat-label>Password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" ngModel
+                        name="password"
+                        required
+                        minlenth="2"
+                        #passwordCtrl="ngModel"
+                        clearInput>
+                        <button matTooltip="Sign In" matTooltipPosition="above" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <button type="submit" [disabled]="!loginForm.valid" class="signInBtn" mat-raised-button>Sign In</button>
+                    </form>
+                  </div>
+                  <div class="form-footer">
+                    <p class="notice">
+                      Can't remember your password? 
+                      <span (click)="resetPasswordOpenModal('reset_password_modal', '', '');">Reset Password Now</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </ion-col>
+            <ion-col size-md="12" size-lg="6" size-xs="12" size-sm="6">
+              <div class="login-bg">
+
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+  </div>
+</ion-content>

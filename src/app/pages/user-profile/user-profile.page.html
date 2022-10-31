@@ -1,0 +1,278 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-content>
+  <div class="page-body">
+    <div class="page-wrapper">
+      <div class="card-outer">
+        <div class="card card-box">
+          <div class="card-body">
+            <div class="view-data">
+              <ion-grid>
+                <ion-row>
+                  <ion-col size-xs="12" size-sm="12" size-md="4"  size-lg="3">
+                    <div class="profile-img">
+                      <div class="img-inner">
+                        <img src="assets/images/noimage.jpg">
+                      </div>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="8"  size-lg="9">
+                    <ion-row class="border">
+                      <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                        <div class="view-element">
+                          <mat-icon class="colorLime">person</mat-icon>
+                          <span class="text-tittle">First Name :</span>
+                          <span class="text-content">{{get_user_dtls?.user?.firstName}}</span>
+                        </div>
+                      </ion-col>
+                      <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                        <div class="view-element">
+                          <mat-icon class="colorOrange">person_outline</mat-icon>
+                          <span class="text-tittle">Last Name :</span>
+                          <span class="text-content">{{get_user_dtls?.user?.lastName}}</span>
+                        </div>
+                      </ion-col>
+                      <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                        <div class="view-element">
+                          <mat-icon class="colorBlue">phone_iphone</mat-icon>
+                          <span class="text-tittle">Mobile :</span>
+                          <span class="text-content">{{get_user_dtls?.user?.phone}}</span>
+                        </div>
+                      </ion-col>
+                      <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                        <div class="view-element">
+                          <mat-icon class="colorRed">mail</mat-icon>
+                          <span class="text-tittle">Email :</span>
+                          <span class="text-content">{{get_user_dtls?.user?.email}}</span>
+                        </div>
+                      </ion-col>
+                    </ion-row>
+                  </ion-col>
+                </ion-row>
+                
+              </ion-grid>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-outer">
+        <div class="card card-box">
+          <div class="card-header">
+            <div class="card-header-tittle">
+              Card Details
+            </div>
+            <div class="card-header-action">
+              <button class="border-btn success" mat-stroked-button (click)="changeCardDetails('add', '')">
+                <mat-icon>add_circle_outline</mat-icon>
+                Add Card
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <ion-grid>
+              <ion-row>
+                <ion-col *ngIf="viewLoadData">
+                  <p class="ion-text-center">Loading..........</p>
+                </ion-col>
+                <ion-col *ngIf="cardDetails?.data.length == 0">
+                  <p class="ion-text-center">You don't have any saved card</p>
+                </ion-col>
+                <ion-col [ngClass]="{ 'ion-hide': viewLoadData}"  size-xs="12" size-sm="12" size-md="6"  size-lg="4" *ngFor="let item of cardDetails?.data; let i = index">
+                  <div class="atm-card" (click)="changeCardDetails('choose', item)" [ngClass]="{ 'selectCard': item?.id == chooseCard?.id}">
+                    <div class="atm-card-inner">
+                      <div class="card-img">
+                        <span *ngIf="item?.id == cardDetails?.active_card" class="default">Default</span>
+                        <img src="assets/images/{{item?.card?.brand}}.png">
+                      </div> 
+                      <div class="card-details">
+                        <h3>CARD NUMBER</h3>
+                        <p>0000 0000 0000 {{item?.card?.last4}}</p>
+                        <h3>
+                          <span>Valid Thru</span>
+                          <span>country</span>
+                        </h3>
+                        <h3>
+                          <span><p>{{item?.card?.exp_month}} / {{item?.card?.exp_year}}</p></span>
+                          <span><p>{{item?.card?.country}}</p></span>
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                </ion-col>
+                <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="4" *ngIf="actionType == 'edit' || actionType == 'add'">
+                  <div class="cardDetailsUpdate form-layout">
+                    <ion-grid class="form-wrapper">
+                      <form  #addForm="ngForm" (ngSubmit)="onSubmit(addForm)">
+                        <ion-row>
+                          <!-- Hidden data -->
+                          <input type="hidden" name="userId" [(ngModel)]="userId">
+                          <input *ngIf="actionType == 'edit'" type="hidden" name="type" [(ngModel)]="model.type">
+                          <input *ngIf="actionType == 'edit'" type="hidden" name="card_id" [(ngModel)]="model.card_id">
+
+                          <!-- Card Number -->
+                          <ion-col size-xs="12" size-sm="12" size-md="12"  size-lg="12">
+                            <div class="form-item">
+                              <ion-label>Card Number</ion-label>
+                              <p *ngIf="actionType == 'edit'">XXXX   XXXX   XXXX   {{model?.number}}</p>
+                              <ion-input *ngIf="actionType == 'add'" name="number" [(ngModel)]="model.number" type="number" minlength="16" maxlength="16"  required></ion-input>
+                            </div>
+                          </ion-col>
+
+                          <!-- Exp Month -->
+                          <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                            <div class="form-item">
+                              <ion-label>Exp Month</ion-label>
+                              <ion-input name="exp_month" [(ngModel)]="model.exp_month" type="number" minlength="2" maxlength="2" required></ion-input>
+                            </div>
+                          </ion-col>
+
+                          <!-- Exp Year -->
+                          <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                            <div class="form-item">
+                              <ion-label>Exp Year</ion-label>
+                              <ion-input name="exp_year" [(ngModel)]="model.exp_year" type="number" minlength="4" maxlength="4" required></ion-input>
+                            </div>
+                          </ion-col>
+
+                          <!-- CVV -->
+                          <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4" *ngIf="actionType == 'add'">
+                            <div class="form-item">
+                              <ion-label>CVV</ion-label>
+                              <ion-input name="cvc" [(ngModel)]="model.cvc" type="number" minlength="3" maxlength="4" required></ion-input>
+                            </div>
+                          </ion-col>
+
+                          <ion-col size-xs="12" size-sm="12" size-md="12"  size-lg="12">
+                            <div>
+                              <button (click)="resetData()"  class="border-btn danger btn-md" type="reset" style="margin-right: 10px;" mat-stroked-button>Cancel</button>
+                              <button class="fill-btn btn-md" mat-stroked-button type="submit" [disabled]="!addForm.valid" >Save</button>
+                            </div>
+                          </ion-col>
+                        </ion-row>
+                      </form>
+                    </ion-grid>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+          <div class="card-footer" *ngIf="chooseCard">
+            <button (click)="changeCardDetails('delete', '')" class="btn-md border-btn danger btn-md" mat-stroked-button>Delete card</button>
+            <div>
+
+              <button (click)="changeCardDetails('default', '')" class="border-btn btn-md" mat-stroked-button style="margin-right: 10px;">Make Default</button>
+              <button (click)="changeCardDetails('edit', '')" class="fill-btn btn-md" mat-stroked-button>Edit Card</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card-outer">
+        <div class="card card-box">
+          <div class="card-header">
+            <div class="card-header-tittle">
+              Package Details
+            </div>
+            <div class="card-header-action">
+              <mat-icon>card_giftcard</mat-icon>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="view-data">
+              <ion-grid>
+                <ion-row class="border">
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorCyan">person</mat-icon>
+                      <span class="text-tittle">Package Name :</span>
+                      <span class="text-content">{{get_user_dtls?.package_data?.name}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorBlue">phone_iphone</mat-icon>
+                      <span class="text-tittle">Package Category :</span>
+                      <span class="text-content">{{get_user_dtls?.package_data?.packageCategoryName}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorRed">mail</mat-icon>
+                      <span class="text-tittle">Package Description :</span>
+                      <span class="text-content">{{get_user_dtls?.package_data?.description}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorLightBlue">admin_panel_settings</mat-icon>
+                      <span class="text-tittle">Included Features :</span>
+                      <span class="text-content">{{get_user_dtls?.package_data?.includedFeatures}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorMaroon">verified</mat-icon>
+                      <span class="text-tittle">Not Included Features :</span>
+                      <span class="text-content">{{get_user_dtls?.package_data?.notIncludedFeatures}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorLightGreen">my_location</mat-icon>
+                      <span class="text-tittle">Amount :</span>
+                      <span class="text-content">{{get_user_dtls?.package_data?.amount}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorMaroon">pin_drop</mat-icon>
+                      <span class="text-tittle">Subscription Id :</span>
+                      <span class="text-content">{{get_user_dtls?.package_data?.subscriptionId}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorLime">room</mat-icon>
+                      <span class="text-tittle">Subscription Date :</span>
+                      <span class="text-content">{{get_user_dtls?.package_data?.subscriptionDate | date:'dd MMM yyy'}} {{get_user_dtls?.package_data?.subscriptionDate | date:'h:mm a '}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorOlive">explore</mat-icon>
+                      <span class="text-tittle">Subscription Exp. Date :</span>
+                      <span class="text-content">{{get_user_dtls?.package_data?.subscriptionExpiredDate | date:'dd MMM yyy'}} {{get_user_dtls?.package_data?.subscriptionExpiredDate | date:'h:mm a '}}</span>
+                    </div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6"  size-lg="6">
+                    <div class="view-element">
+                      <mat-icon class="colorOrange">public</mat-icon>
+                      <span class="text-tittle">Status :</span>
+                      <span class="text-content">{{get_user_dtls?.package_data?.status}}</span>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button (click)="subscriptionStatusChange('cancel')" class="btn-md border-btn danger btn-md" mat-stroked-button>Cancel Subscription</button>
+            <div>
+
+              <button *ngIf="get_user_dtls?.package_data?.status == 'active'" (click)="subscriptionStatusChange('unsubcribe')" class="border-btn btn-md" mat-stroked-button style="margin-right: 10px;">Pause Subscription</button>
+              <button *ngIf="get_user_dtls?.package_data?.status !== 'active'"  (click)="subscriptionStatusChange('subcribe')" class="fill-btn btn-md" mat-stroked-button>Start Subscription</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<!-- common footer show -->
+<common-footer></common-footer>

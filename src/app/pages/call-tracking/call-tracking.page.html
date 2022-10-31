@@ -1,0 +1,161 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-content>
+  <div class="page-body">
+    <div class="page-wrapper">
+      <div class="table-listing">
+        <div class="card-outer">
+          <div class="card card-box">
+              <div class="card-header">
+                  <div class="card-header-tittle">
+                      Call Tracking Lists
+                  </div>
+                  <div class="card-header-action">
+                      <mat-icon>tty</mat-icon>
+                  </div>
+              </div>
+              <div class="card-body">
+                <div class="table-header">
+                  <div class="records-wrapper">
+                    <ion-item class="record">
+                      <span>Records: </span>
+                      <mat-form-field>
+                        <mat-select [(ngModel)]="displayRecord" name="food" (selectionChange)="displayRecordChange($event.value)">
+                          <mat-option *ngFor="let record of displayRecords" [value]="record.displayValue">
+                            {{record.displayValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </ion-item>
+                  </div>
+                  <div class="search-wrapper">
+                    
+                  </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="ion-text-start">
+                                    <div>
+                                        #
+                                    </div>
+                                </th>
+                                <th class="ion-text-start">
+                                  <div>
+                                      Contact
+                                      <mat-icon>person</mat-icon>
+                                  </div>
+                                </th>
+                                <th class="ion-text-center">
+                                  <div>
+                                    Source
+                                    <mat-icon>source</mat-icon>
+                                  </div>
+                                </th>
+                                <th class="ion-text-center">
+                                  <div>
+                                    Audio
+                                    <mat-icon>volume_up</mat-icon>
+                                  </div>
+                                </th>
+                                <th class="ion-text-center">
+                                  <div>
+                                    Metrics
+                                    <mat-icon>signal_cellular_alt</mat-icon>
+                                  </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <tr  [hidden]="!isListLoading" class="loading-table-data">
+                            <td colspan="100">
+                              Data is loading...
+                            </td>
+                          </tr>
+                          <tr  *ngFor="let item of fetchItems; let i = index" [hidden]="isListLoading" >
+                            <td>{{i + 1}}</td>
+                            <td>
+                              <ion-item class="name-box">
+                                <ion-label>
+                                  <h2 class="userName">{{item?.cnam}}</h2>
+                                  <h3 class="userRole">{{item?.caller_number_format}}</h3>
+                                  <p>
+                                    {{item?.city}},
+                                    {{item?.state}},
+                                    {{item?.country}}
+                                  </p>
+                                </ion-label>
+                              </ion-item>
+                            </td>
+                            <td>
+                              {{item?.source}}<br>
+                              {{item?.tracking_number_format}}
+                            </td>
+                            <td>
+                              <audio controls style="width: 180px;">
+                                <source src="{{item?.audio}}" type="audio/mpeg">
+                              </audio>
+                            </td>
+                            <td>
+                              {{item?.called_at}}<br>
+                              <div class="iconWithName" *ngIf="item?.call_status == 'answered'">
+                                <mat-icon color="primary">wifi_calling_3</mat-icon>{{item?.call_status}}
+                              </div>
+                              <div class="iconWithName" *ngIf="item?.call_status == 'no answer'">
+                                <mat-icon color="warn">call_end</mat-icon>{{item?.call_status}}
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+              <div class="card-footer">
+                  <div class="action">
+                    
+                  </div>
+                  <div>
+                    <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                        <li (click)="setPage(1)" [ngClass]="{disabled:pager.currentPage === 1}" class="circle-border" matTooltip="First" matTooltipPosition="above">
+                            <a>
+                              <!-- First -->
+                              <ion-icon name="play-skip-back"></ion-icon>
+                            </a>
+                        </li>
+                        <li (click)="setPage(pager.currentPage - 1)" [ngClass]="{disabled:pager.currentPage === 1}" class="circle-border" matTooltip="Previous" matTooltipPosition="above">
+                            <a>
+                              <!-- Previous -->
+                              <ion-icon name="caret-back"></ion-icon>
+                            </a>
+                        </li>
+                        <li> <span class="ran-separator pull-right margin-top-3"></span> </li>
+                        <li>
+                          Page <a>{{ pager.currentPage }}</a> of {{ pager.totalPages }} 
+                        </li>
+                        <li> <span class="ran-separator pull-right margin-top-3"></span> </li>
+                        <li (click)="setPage(pager.currentPage + 1)" [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="circle-border" matTooltip="Next" matTooltipPosition="above">
+                            <a>
+                              <!-- Next -->
+                              <ion-icon name="caret-forward"></ion-icon>
+                            </a>
+                        </li>
+                        <li (click)="setPage(pager.totalPages)" [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="circle-border" matTooltip="Last" matTooltipPosition="above">
+                            <a>
+                              <!-- Last -->
+                              <ion-icon name="play-skip-forward"></ion-icon>
+                            </a>
+                        </li>
+                    </ul>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<!-- common footer show -->
+<common-footer></common-footer>

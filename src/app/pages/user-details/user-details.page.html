@@ -1,0 +1,166 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-content>
+  <div class="page-body">
+    <div class="page-wrapper">
+      <div class="form-layout">
+        <div class="card-outer">
+          <div class="card card-box">
+              <div class="card-header">
+                  <div class="card-header-tittle">
+                      Institute Add
+                  </div>
+                  <div class="card-header-action">
+                  </div>
+              </div>
+              <div class="card-body">
+                <div class="form-wrapper">
+                  <ion-grid>
+                    <ion-row>
+                      <!-- Username -->
+                      <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                        <div class="form-item">
+                          <ion-label>User Name</ion-label>
+                          <ion-input name="name" type="text"></ion-input>
+                        </div>
+                      </ion-col>
+                      <!-- Password -->
+                      <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                        <div class="form-item">
+                          <ion-label>Password</ion-label>
+                          <ion-input name="name" type="password"></ion-input>
+                        </div>
+                      </ion-col>
+                      <!-- Confirm Password -->
+                      <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                        <div class="form-item">
+                          <ion-label>Confirm Password</ion-label>
+                          <ion-input name="name" type="password"></ion-input>
+                        </div>
+                      </ion-col>
+                      <!-- Institute Name -->
+                      <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                        <div class="form-item">
+                          <ion-label>Institute Name</ion-label>
+                          <ion-input name="name" type="text"></ion-input>
+                        </div>
+                      </ion-col>
+                      <!-- Institute Owner Name -->
+                      <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                        <div class="form-item">
+                          <ion-label>Institute Owner Name</ion-label>
+                          <ion-input name="name" type="text"></ion-input>
+                        </div>
+                      </ion-col>
+                      <!-- Contact Person Name -->
+                      <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                        <div class="form-item">
+                          <ion-label>Contact Person Name</ion-label>
+                          <ion-input name="name" type="text"></ion-input>
+                        </div>
+                      </ion-col>
+                      <!-- Contact number -->
+                      <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                        <div class="form-item">
+                          <ion-label>Contact number</ion-label>
+                          <ion-input name="name" type="number"></ion-input>
+                        </div>
+                      </ion-col>
+                      <!-- Email address -->
+                      <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                        <div class="form-item">
+                          <ion-label>Email address</ion-label>
+                          <ion-input name="name" type="email"></ion-input>
+                        </div>
+                      </ion-col>
+                      <!-- Institute Website -->
+                      <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                        <div class="form-item">
+                          <ion-label>Institute Website</ion-label>
+                          <ion-input name="name" type="text"></ion-input>
+                        </div>
+                      </ion-col>
+                      <!-- Address Line 1 -->
+                      <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                        <div class="form-item">
+                          <ion-label>Address Line 1</ion-label>
+                          <ion-input name="name" type="text"></ion-input>
+                        </div>
+                      </ion-col>
+                      <!-- Address Line 2 -->
+                      <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                        <div class="form-item">
+                          <ion-label>Address Line 1</ion-label>
+                          <ion-input name="name" type="text"></ion-input>
+                        </div>
+                      </ion-col>
+                      <!-- Country -->
+                      <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                        <div class="form-item">
+                          <ion-label>Country</ion-label>
+                          <ng-select #select [items]="country" [searchable]="false" [(ngModel)]="selectedCountry" bindLabel="name" bindValue="name">
+                            <ng-template ng-header-tmp>
+                                <input style="width: 100%; line-height: 24px" type="text" />
+                            </ng-template>
+                          </ng-select>
+                        </div>
+                      </ion-col>
+                      <!-- State -->
+                      <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                        <div class="form-item">
+                          <ion-label>State</ion-label>
+                          <ng-select #select [items]="state" [searchable]="false" [(ngModel)]="selectedState" bindLabel="name" bindValue="name">
+                            <ng-template ng-header-tmp>
+                                <input style="width: 100%; line-height: 24px" type="text" />
+                            </ng-template>
+                          </ng-select>
+                        </div>
+                      </ion-col>
+                      <!-- City -->
+                      <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                        <div class="form-item">
+                          <ion-label>City</ion-label>
+                          <ng-select #select [items]="city" [searchable]="false" [(ngModel)]="selectedCity" bindLabel="name" bindValue="name">
+                            <ng-template ng-header-tmp>
+                                <input style="width: 100%; line-height: 24px" type="text" />
+                            </ng-template>
+                          </ng-select>
+                        </div>
+                      </ion-col>
+                      <!-- Pin Code -->
+                      <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                        <div class="form-item">
+                          <ion-label>Pin Code</ion-label>
+                          <ion-input name="name" type="number"></ion-input>
+                        </div>
+                      </ion-col>
+                      <!-- Institute Logo -->
+                      <ion-col size-xs="12" size-sm="6" size-md="4"  size-lg="4">
+                        <div class="form-item">
+                          <ion-label>Institute Logo</ion-label>
+                          <div class="custom-file">
+                            <input class="custom-file-input" id="singleFileUpload" type="file">
+                            <label class="custom-file-label" for="singleFileUpload">Choose file</label>
+                          </div>
+                        </div>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </div>
+              </div>
+              <div class="card-footer">
+                  <div>
+                      <button class="border-btn danger btn-md" style="margin-right: 10px;" mat-stroked-button>Cancel</button>
+                      <button class="fill-btn btn-md" (click)="presentToast()" mat-stroked-button [routerLink]="['/', 'security-list']">Save</button>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<!-- common footer show -->
+<common-footer></common-footer>

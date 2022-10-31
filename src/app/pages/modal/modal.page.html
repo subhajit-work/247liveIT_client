@@ -1,0 +1,77 @@
+<ion-header class="modal-header">
+  <ion-toolbar>
+    <div class="modal-inner">
+      <ion-title>{{heder_title}}</ion-title>
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="common-modal-body">
+    <div class="form-layout">
+      <div class="form-wrapper">
+        <!-- Change password -->
+        <ion-grid *ngIf="get_identifier == 'change_password_modal'">
+          <form #changePasswordForm="ngForm" (ngSubmit)="onSubmitForm(changePasswordForm)" (keyup.enter)="onSubmitForm(changePasswordForm)" [mustMatch]="['password', 'confirm_password']" novalidate>
+            <ion-row>
+              <input type="hidden" name="userId" [(ngModel)]="get_item" required>
+              <!-- Old Password -->
+              <ion-col size-xs="12" size-sm="12" size-md="12"  size-lg="12">
+                <div class="form-item">
+                  <ion-label>Old Password</ion-label>
+                  <ion-input name="currentPassword" [(ngModel)]="model.currentPassword" type="password" required></ion-input>
+                </div>
+              </ion-col>
+              <!-- New Password -->
+              <ion-col size-xs="12" size-sm="12" size-md="12"  size-lg="12">
+                <div class="form-item">
+                  <ion-label>New Password</ion-label>
+                  <ion-input name="password" #password="ngModel" [(ngModel)]="model.password" type="password" required></ion-input>
+                </div>
+              </ion-col>
+              <!-- Confirm Password -->
+              <ion-col size-xs="12" size-sm="12" size-md="12"  size-lg="12">
+                <div class="form-item">
+                  <ion-label>Confirm Password</ion-label>
+                  <ion-input name="confirm_password" #confirmPassword="ngModel" [(ngModel)]="model.confirm_password" type="password" required></ion-input>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-footer class="modal-footer">
+              <div class="footer-inner">
+                <button class="border-btn danger btn-md" style="margin-right: 10px;" (click)="closeModal()" mat-stroked-button>Cancel</button>
+                <button class="fill-btn btn-md" mat-stroked-button type="submit" [disabled]="!changePasswordForm.valid">Save</button>
+              </div>
+            </ion-footer>
+          </form>
+        </ion-grid>
+        <!-- Reset password -->
+        <ion-grid *ngIf="get_identifier == 'reset_password_modal'">
+          <form #resetPasswordForm="ngForm" (ngSubmit)="onSubmitForm(resetPasswordForm)" (keyup.enter)="onSubmitForm(resetPasswordForm)">
+            <ion-row>
+              <!-- email -->
+              <ion-col size-xs="12" size-sm="12" size-md="12"  size-lg="12">
+                <div class="form-item">
+                  <ion-label>Email <sup>*</sup></ion-label>
+                  <ion-input name="email" [(ngModel)]="model.email" type="email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                  name="email"
+                  email required></ion-input>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-footer class="modal-footer">
+              <div class="footer-inner">
+                <button class="border-btn danger btn-md" style="margin-right: 10px;" (click)="closeModal()" mat-stroked-button>Cancel</button>
+                <button class="fill-btn btn-md" mat-stroked-button type="submit" [disabled]="!resetPasswordForm.valid">Save</button>
+              </div>
+            </ion-footer>
+          </form>
+        </ion-grid>
+      </div>
+    </div>
+  </div>
+</ion-content>

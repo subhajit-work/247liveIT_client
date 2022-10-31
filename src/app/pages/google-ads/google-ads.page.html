@@ -1,0 +1,462 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-content>
+  <div class="page-body">
+    <div class="edit-loading-page" *ngIf="viewLoadData">
+      <span>
+          <ion-spinner color="secondary" name="lines"></ion-spinner>
+      </span>
+    </div>
+    <div class="page-wrapper" *ngIf="!viewLoadData">
+      <div class="page-header">
+        <div class="header-right">
+          <p>Google Ad's</p>
+        </div>
+        <!-- <div class="header-left">
+          <div class="input-field mat-datePicker">
+            <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate [(ngModel)]="fromDate" placeholder="Start date" (dateInput)="startDate('input', $event)" (dateChange)="startDate('change', $event)">
+                <input matEndDate [(ngModel)]="toDate" placeholder="End date" (dateInput)="endDate('input', $event)" (dateChange)="endDate('change', $event)">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </div>
+        </div> -->
+      </div>
+
+      <!-- cards -->
+      <div class="note-section">
+        <ion-grid>
+          <ion-row>
+            <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+              <div class="note-item note-item2 note-box-primary card-outer">
+                  <div class="card card-box">
+                      <div class="top">
+                          <div class="icon">
+                              <mat-icon>paid</mat-icon>
+                          </div>
+                      </div>
+                      <div class="bottom"><b>{{viewData?.overview?.ads_cost}}</b> Ad's Cost</div>
+                  </div>
+              </div>             
+            </ion-col>
+            <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+              <div class="note-item note-item2 note-box-danger card-outer">
+                <div class="card card-box">
+                    <div class="top">
+                        <div class="icon">
+                            <mat-icon>favorite</mat-icon>
+                        </div>
+                    </div>
+                    <div class="bottom"><b>{{viewData?.overview?.ads_impressions}}</b> Ad's Impressions</div>
+                </div>
+              </div>             
+            </ion-col>
+            <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+              <div class="note-item note-item2 note-box-success card-outer">
+                <div class="card card-box">
+                    <div class="top">
+                        <div class="icon">
+                            <mat-icon>published_with_changes</mat-icon>
+                        </div>
+                    </div>
+                    <div class="bottom"><b>{{viewData?.overview?.all_conversions}}</b> All Conversions</div>
+                </div>
+              </div>             
+            </ion-col>
+            <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+              <div class="note-item note-item2 note-box-warning card-outer">
+                <div class="card card-box">
+                    <div class="top">
+                        <div class="icon">
+                            <mat-icon>ads_click</mat-icon>
+                        </div>
+                    </div>
+                    <div class="bottom"><b>{{viewData?.overview?.average_cpc}}</b> Average CPC</div>
+                </div>
+              </div>             
+            </ion-col>
+            <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+              <div class="note-item note-item2 note-box-primary card-outer">
+                  <div class="card card-box">
+                      <div class="top">
+                          <div class="icon">
+                              <mat-icon>mouse</mat-icon>
+                          </div>
+                      </div>
+                      <div class="bottom"><b>{{viewData?.overview?.clicks}}</b> Clicks</div>
+                  </div>
+              </div>             
+            </ion-col>
+            <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+              <div class="note-item note-item2 note-box-danger card-outer">
+                <div class="card card-box">
+                    <div class="top">
+                        <div class="icon">
+                            <mat-icon>percent</mat-icon>
+                        </div>
+                    </div>
+                    <div class="bottom"><b>{{viewData?.overview?.conversion_rate }}</b> Conversions Rate</div>
+                </div>
+              </div>             
+            </ion-col>
+            <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+              <div class="note-item note-item2 note-box-success card-outer">
+                <div class="card card-box">
+                    <div class="top">
+                        <div class="icon">
+                            <mat-icon>question_answer</mat-icon>
+                        </div>
+                    </div>
+                    <div class="bottom"><b>{{viewData?.overview?.conversions}}</b> Conversions</div>
+                </div>
+              </div>             
+            </ion-col>
+            <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+              <div class="note-item note-item2 note-box-warning card-outer">
+                <div class="card card-box">
+                    <div class="top">
+                        <div class="icon">
+                            <mat-icon>price_change</mat-icon>
+                        </div>
+                    </div>
+                    <div class="bottom"><b>{{viewData?.overview?.conversions_value}}</b> Conversions Value</div>
+                </div>
+              </div>             
+            </ion-col>
+            <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+              <div class="note-item note-item2 note-box-success card-outer">
+                <div class="card card-box">
+                    <div class="top">
+                        <div class="icon">
+                            <mat-icon>trending_up</mat-icon>
+                        </div>
+                    </div>
+                    <div class="bottom"><b>{{viewData?.overview?.ctr}}</b> CTR</div>
+                </div>
+              </div>             
+            </ion-col>
+            <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="2">
+              <div class="note-item note-item2 note-box-warning card-outer">
+                <div class="card card-box">
+                    <div class="top">
+                        <div class="icon">
+                            <mat-icon>thumbs_up_down</mat-icon>
+                        </div>
+                    </div>
+                    <div class="bottom"><b>{{viewData?.overview?.impressions}}</b> Impressions</div>
+                </div>
+              </div>             
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+      <!-- Campaign -->
+      <div class="table-listing">
+        <div class="card-outer">
+          <div class="card card-box">
+              <div class="card-header">
+                  <div class="card-header-tittle">
+                    Ad's Campaign
+                  </div>
+                  <div class="card-header-action">
+                    
+                  </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="ion-text-start">
+                                    <div>
+                                        #
+                                    </div>
+                                </th>
+                                <th class="ion-text-start">
+                                    <div>
+                                        Campaign Id
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Name
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Customer Id
+                                    </div>
+                                </th><th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Campaign Budget
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Clicks
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Impressions
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        CTR
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Conversions
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                  <div class="ion-justify-content-center">
+                                      Average Cost
+                                  </div>
+                                </th>
+                                <th class="ion-text-center">
+                                  <div class="ion-justify-content-center">
+                                      Status
+                                  </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr [hidden]="viewData?.campaign?.length == 0" *ngFor="let item of viewData?.campaign; let i = index">
+                                <td>{{i + 1}}</td>
+                                <td>{{item?.campaign?.id}}</td>
+                                <td>{{item?.campaign?.name}}</td>
+                                <td>{{item?.customer?.id}}</td>
+                                <td>{{item?.campaign_budget?.name}}</td>
+                                <td>{{item?.metrics?.clicks}}</td>
+                                <td>{{item?.metrics?.impressions}}</td>
+                                <td>{{item?.metrics?.ctr}}</td>
+                                <td>{{item?.metrics?.conversions}}</td>
+                                <td>{{item?.metrics?.average_cost}}</td>
+                                <td>
+                                  <div *ngIf="item?.campaign?.status == '2'" class="status success">
+                                    Eligable
+                                  </div>
+                                  <div *ngIf="item?.campaign?.status == '3'" class="status warning">
+                                    Paused
+                                  </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="viewData?.campaign?.length == 0" class="ion-text-center">
+                              <td colspan="100">No data found</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ads group -->
+      <div class="table-listing">
+        <div class="card-outer">
+          <div class="card card-box">
+              <div class="card-header">
+                  <div class="card-header-tittle">
+                    Ads group
+                  </div>
+                  <div class="card-header-action">
+                    
+                  </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="ion-text-start">
+                                    <div>
+                                        #
+                                    </div>
+                                </th>
+                                <th class="ion-text-start">
+                                    <div>
+                                        Ad's Id
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Name
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Clicks
+                                    </div>
+                                </th><th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Impressions
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Conversions
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        CTR
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Average Cost
+                                    </div>
+                                </th>
+                                <th class="ion-text-center">
+                                    <div class="ion-justify-content-center">
+                                        Status
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <tr [hidden]="viewData?.adsg?.length == 0" *ngFor="let item of viewData?.adsg; let i = index">
+                            <td>{{i + 1}}</td>
+                            <td>{{item?.ad_group?.id}}</td>
+                            <td>{{item?.ad_group?.name}}</td>
+                            <td>{{item?.metrics?.clicks}}</td>
+                            <td>{{item?.metrics?.impressions}}</td>
+                            <td>{{item?.metrics?.conversions}}</td>
+                            <td>{{item?.metrics?.ctr}}</td>
+                            <td>{{item?.metrics?.average_cost}}</td>
+                            <td>
+                              <div *ngIf="item?.ad_group?.status == '2'" class="status success">
+                                Eligable
+                              </div>
+                              <div *ngIf="item?.ad_group?.status == '3'" class="status warning">
+                                Paused
+                              </div>
+                            </td>
+                          </tr>
+                          <tr *ngIf="viewData?.adsg?.length == 0" class="ion-text-center">
+                            <td colspan="100">No data found</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ad's -->
+      <div class="table-listing">
+        <div class="card-outer">
+          <div class="card card-box">
+              <div class="card-header">
+                  <div class="card-header-tittle">
+                    Ad's
+                  </div>
+                  <div class="card-header-action">
+                    
+                  </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="ion-text-start">
+                                <div>
+                                    #
+                                </div>
+                            </th>
+                            <th class="ion-text-start">
+                                <div>
+                                    Ad's Id
+                                </div>
+                            </th>
+                            <th class="ion-text-center">
+                                <div class="ion-justify-content-center">
+                                    Ad's Group Name
+                                </div>
+                            </th><th class="ion-text-center">
+                                <div class="ion-justify-content-center">
+                                    Campaign Name
+                                </div>
+                            </th>
+                            <th class="ion-text-center">
+                                <div class="ion-justify-content-center">
+                                    Customer Id
+                                </div>
+                            </th>
+                            <th class="ion-text-center">
+                                <div class="ion-justify-content-center">
+                                    Clicks
+                                </div>
+                            </th>
+                            <th class="ion-text-center">
+                                <div class="ion-justify-content-center">
+                                    Impressions
+                                </div>
+                            </th>
+                            <th class="ion-text-center">
+                              <div class="ion-justify-content-center">
+                                  Average Cost
+                              </div>
+                            </th>
+                            <th class="ion-text-center">
+                              <div class="ion-justify-content-center">
+                                  Average CPC
+                              </div>
+                            </th>
+                            <th class="ion-text-center">
+                              <div class="ion-justify-content-center">
+                                  Conversions
+                              </div>
+                            </th>
+                            <th class="ion-text-center">
+                              <div class="ion-justify-content-center">
+                                  CTR
+                              </div>
+                            </th>
+                            <th class="ion-text-center">
+                              <div class="ion-justify-content-center">
+                                  Cost per conversions
+                              </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr [hidden]="viewData?.ads?.length == 0" *ngFor="let item of viewData?.ads; let i = index">
+                        <td>{{i + 1}}</td>
+                        <td>{{item?.ad_group_ad?.ad?.id}}</td>
+                        <td>{{item?.ad_group?.name}}</td>
+                        <td>{{item?.campaign?.name}}</td>
+                        <td>{{item?.customer?.id}}</td>
+                        <td>{{item?.metrics?.clicks}}</td>
+                        <td>{{item?.metrics?.impressions}}</td>
+                        <td>{{item?.metrics?.average_cost}}</td>
+                        <td>{{item?.metrics?.average_cpc}}</td>
+                        <td>{{item?.metrics?.conversions}}</td>
+                        <td>{{item?.metrics?.ctr}}</td>
+                        <td>{{item?.metrics?.cost_per_conversion}}</td>
+                      </tr>
+                      <tr *ngIf="viewData?.ads?.length == 0" class="ion-text-center">
+                        <td colspan="100">No data found</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<!-- common footer show -->
+<common-footer></common-footer>

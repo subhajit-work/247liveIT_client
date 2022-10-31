@@ -1,0 +1,105 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-content>
+  <div class="page-body">
+    <div class="page-wrapper">
+      <div class="card-outer">
+        <div class="card card-box">
+          <div class="card-body">
+            <div class="view-data">
+              <ion-grid>
+                <ion-row>
+                  <ion-col size-xs="12" size-sm="12" size-md="4"  size-lg="3">
+                    <div class="profile-img">
+                      <div class="img-inner">
+                        <img src="assets/images/SEO-report-free.png">
+                      </div>
+                    </div>
+                  </ion-col>
+
+                  <ion-col class="ion-text-center" size-xs="12" size-sm="12" size-md="8"  size-lg="9">
+                    <div class="table-listing">
+                      <div class="card-outer">
+                        <div class="card card-box">
+                            <div class="card-header">
+                                <div class="card-header-tittle ion-text-start">
+                                    SEO Report Lists
+                                </div>
+                                <div class="card-header-action">
+                                  <mat-icon>summarize</mat-icon>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                              <div class="table-responsive">
+                                  <table class="table">
+                                      <thead>
+                                          <tr>
+                                              <th class="ion-text-start">
+                                                  <div>
+                                                      #
+                                                  </div>
+                                              </th>
+                                              <th class="ion-text-start">
+                                                  <div>
+                                                      Name
+                                                  </div>
+                                              </th>
+                                              <th class="ion-text-center">
+                                                  <div class="ion-justify-content-center">
+                                                    Month
+                                                  </div>
+                                              </th>
+                                              <th class="ion-text-start">
+                                                <div class="ion-justify-content-center">
+                                                  Actions
+                                                </div>
+                                              </th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <tr [hidden]="viewLoadData" *ngFor="let item of cardDetails?.data; let i = index">
+                                              <td>{{i + 1}}</td>
+                                              <td class="ion-text-start">
+                                                {{item?.document_name}}
+                                              </td>
+                                              <td class="ion-text-center">
+                                                {{item?.month}}
+                                              </td>
+                                              <td>
+                                                <div class="action ion-text-center">
+                                                  <ion-button (click)="goToLink(item.id)" matTooltip="Download PDF" matTooltipPosition="above" size="small" color="tertiary">
+                                                      <mat-icon>picture_as_pdf</mat-icon>
+                                                  </ion-button>
+                                                </div>
+                                              </td>
+                                          </tr>
+                                          <tr *ngIf="cardDetails?.data?.length == 0 && !viewLoadData" class="ion-text-center">
+                                              <td colspan="100">No data found</td>
+                                          </tr>
+                                          <tr [hidden]="!viewLoadData" class="ion-text-center">
+                                              <td colspan="100">
+                                                  Data is loading...
+                                              </td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ion-col>
+                </ion-row>
+                
+              </ion-grid>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<!-- common footer show -->
+<common-footer></common-footer>
